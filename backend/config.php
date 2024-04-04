@@ -1,11 +1,12 @@
 <?php
+require_once 'vendor/autoload.php';
 
-$servername = "127.0.0.1"; 
-$username = "root";    
-$password = "";  
-$dbname = "off_moto"; 
+use Dotenv\Dotenv;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$conn = new mysqli($_ENV["DATABASE_HOSTNAME"],$_ENV["DATABASE_USERNAME"],$_ENV["DATABASE_PASSWORD"],$_ENV["DATABASE_NAME"]);
 
 if ($conn->connect_error) {
     echo("Connessione fallita: " . $conn->connect_error);
